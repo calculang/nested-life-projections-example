@@ -53,6 +53,8 @@ calculang aims to make models that are multipurpose in the extreme, and where th
 
 [**Use this link** to run in the Actuarial Playground UI](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js) **Click '💬' to show model formulas and use dropdown to select .cul.js files** OR else:
 
+<details><summary>Alternative steps</summary>
+
 1. Copy to clipboard:
 
 ~~~js
@@ -66,6 +68,8 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 4. Select all code, delete, replace with the clipboard
 
 5. The visualization will update, and you can browse all the formula code by looking in the dropdown
+
+</details>
 
 **Tip**: Use the mouse wheel to zoom in and out of the Playground visualization, and hold shift to zoom on the y axis only (to control the aspect ratio).
 
@@ -99,7 +103,7 @@ node ./output/run.js
 
 ---
 
-**Feedback/Discussion**: I'm really interested in early reactions about the calculang patterns to this problem. I aim to provide more helpful material for actuaries about how I apply the specific calculang features, and early reactions will help to ground that work.
+**Feedback/Discussion**: I'm really interested in early reactions about the calculang features applied to this problem. I aim to provide more helpful material for actuaries about how I apply the specific calculang features, and early reactions will help to ground that work.
 
 Nested actuarial modelling approaches are open for discussion with the Actuarial Open Source Community [here](https://github.com/actuarialopensource/methodology/discussions) and a specific discussion about this implementation is posted [here](#). Please participate there!
 
@@ -109,4 +113,4 @@ This month I'm also happy to meet and discuss with members of the [Actuarial Ope
 
 ## Inspecting the calculang compiler
 
-For information purposes, `output` folders in this repository include some additional calculang output files; some details included in their corresponding README files.
+For information purposes, `output` folders in this repository include some additional calculang output files; some details are included in their corresponding README files.
