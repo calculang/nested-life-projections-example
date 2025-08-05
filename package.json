@@ -1,0 +1,22 @@
+{
+  "name": "nested-life-projections-example",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "example of nested life actuarial projectioning",
+  "homepage": "https://github.com/calculang/nested-life-projections-example#readme",
+  "bugs": {
+    "url": "https://github.com/calculang/nested-life-projections-example/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calculang/nested-life-projections-example.git"
+  },
+  "author": "Declan Naughton",
+  "scripts": {
+    "minimal-output": "node ./minimal/output/make-bundle.js",
+    "output": "node ./output/make-bundle.js"
+  },
+  "dependencies": {
+    "calculang": "github:calculang/calculang#all_cul"
+  }
+}
