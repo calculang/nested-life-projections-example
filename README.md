@@ -14,7 +14,22 @@ Similar to the `Term` base class, the calculang model centralises common modelli
 
 `capital-requirements.cul.js` is a calculang model that imports `term.cul.js`, but "overriding" specific behavior for capital requirement calculations.
 
-Notably, the `q_x` formula is overriden to apply a prudence factor or not depending on new projection inputs. Then, `capital_requirements` formula definition can call appropriate cashflow projection formulas (specifically `fut_claims`), applying appropriate new projection input values relating to prudence.
+Notably, the `q_x` formula is overriden to apply a prudence factor or not depending on new projection inputs. Then, `capital_requirements` formula definition can call appropriate cashflow projection formulas, applying appropriate new projection input values relating to prudence.
+
+<details><summary>Related formula definitions</summary>
+
+~~~js
+export const q_x = () => {
+  if (t() >= t_inner()) return q_x_() * prudence_factor();
+  else return q_x_();
+};
+
+export const capital_requirement = () =>
+  fut_claims({ t_in: t() + 1, t_inner_in: t(), prudence_factor_in: 1.2 }) +
+  fut_premiums({ t_in: t(), t_inner_in: t(), prudence_factor_in: 1.2 });
+~~~
+
+</details>
 
 <details><summary>Input inference</summary>
 

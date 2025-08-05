@@ -1,4 +1,3 @@
-
 import { all_cul } from "./term.cul.js";
 
 export const q_x = () => {
@@ -17,7 +16,6 @@ export const capital_change = () => {
   if (t() == 0) return capital_requirement();
   else return capital_requirement() - capital_requirement({ t_in: t() - 1 });
 };
-
 
 export const fut_premiums = () => {
   if (t() >= term_m()) return 0;

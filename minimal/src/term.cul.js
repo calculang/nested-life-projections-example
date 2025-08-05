@@ -1,4 +1,3 @@
-
 export const premiums = () => {
   if (t() >= 0 && t() < term_m() - 1) return (num_pols_if() * premium()) / 12;
   else return 0;
@@ -22,7 +21,6 @@ export const num_deaths = () => {
 export const q_x = () => 0.001;
 
 // For minimal I moved `fut_x` formulas over to capital-requirements.cul.js
-
 
 // inputs:
 export const t = () => t_in;
