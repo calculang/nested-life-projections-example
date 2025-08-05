@@ -53,11 +53,9 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 
 ## Option 2: Minimal calculang Model
 
-`./minimal` achieves the same result but without distracting annotations or redundant formulas: for analysis of the calculang logic/implementation itself.
+[`./minimal`](./minimal/) achieves the same results but without comments or redundant formulas: for analysis of the calculang logic/implementation itself.
 
-I recommend opening `capital.cul.js` and `term.cul.js` side-by-side in your text editor of choice.
-
-TODO link to screenshot here.
+![capital-requirements and term calculang formulas (unannotated)](./minimal/minimal.png)
 
 ---
 
