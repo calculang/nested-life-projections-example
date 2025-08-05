@@ -21,7 +21,7 @@ export const num_deaths = () => {
 
 export const q_x = () => 0.001;
 
-// For minimal I moved `fut_x` formulas to capital-requirements.cul.js
+// For minimal I moved `fut_x` formulas over to capital-requirements.cul.js
 
 
 // inputs:
