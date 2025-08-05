@@ -28,6 +28,8 @@ Input inference helps formulas to be concise, but adaptability is the real goal.
 
 ## Option 1: Annotated calculang Model using Actuarial Playground UI
 
+[**Use this link** to run in the Actuarial Playground UI](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js) OR:
+
 To see results using the Actuarial Playground UI:
 
 1. Copy to clipboard:
@@ -44,6 +46,8 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 
 5. The visualization will update, and you can browse all the formula code by looking in the dropdown
 
+**Tip**: Use the mouse wheel to zoom in and out of the Playground visualization, and hold shift to zoom on the y axis only (to control the aspect ratio).
+
 **Tip** 📌: there is a semi-transparent '🥚' in the Actuarial Playground UI; there you can turn on graphs and an improved (more responsive) tooltip over visualization elements, as well as a legend.
 
 **Note**: Especially when model code is loaded from a URL (by following the instructions above), there are some bugs around *editing* directly in the Actuarial Playground UI: especially when you switch `.cul.js` files, you probably lose custom changes.
@@ -54,6 +58,8 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 ## Option 2: Minimal calculang Model
 
 [`./minimal`](./minimal/) achieves the same results but without comments or redundant formulas: for analysis of the calculang logic/implementation itself.
+
+[Load in the Actuarial Playground](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/minimal/src/playground.cul.js).
 
 ![capital-requirements and term calculang formulas (unannotated)](./minimal/minimal.png)
 

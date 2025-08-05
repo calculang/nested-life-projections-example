@@ -29,4 +29,4 @@ export const t = () => t_in;
 
 export const term_m = () => term_m_in ?? 120;
 export const premium = () => premium_in ?? 1300;
-export const sum_assured = () => sum_assured_in ?? 100_000;
+export const sum_assured = () => 100_000;
