@@ -18,7 +18,9 @@ Notably, the `q_x` formula is overriden to apply a prudence factor or not depend
 
 <details><summary>Input inference</summary>
 
-**Input inference**: Although the `q_x` formula is explicitly overridden to use new inputs and the logic in `term.cul.js` has no notion about them, the calculang **compiler** infers that `num_deaths` all the way to `fut_claims` in `term.cul.js` should use the new inputs. This explains why there is a lot of empty/minimalistic brackets in calculang functions and calls, and this promotes very general definition of modelling logic, that can be applied for many different purposes.
+Although the `q_x` formula is explicitly overridden to use new inputs and the logic in `term.cul.js` has no notion about them, the calculang **compiler** infers that `num_deaths` all the way to `fut_claims` in `term.cul.js` should use the new inputs. Input inference explains why there is a lot of empty/minimalistic brackets in calculang functions and calls (which I might remove in future), and this promotes very general definition of modelling logic, so that can be applied for many different purposes.
+
+Input inference helps formulas to be concise, but adaptability is the real goal.
 
 </details>
 
