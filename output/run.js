@@ -21,7 +21,7 @@ const m = await compile({
 console.table(calcudata({
   type: 'objects',
   models: [m.js],
-  input_cursors: [{t_in: 0, term_m_in: 120, premium_in: 1300, start_age_in: 30, t_inner_in: -1, prudence_factor_in: 1}],
+  input_cursors: [{t_in: 0, term_m_in: 120, premium_in: 1300, start_age_in: 30}],
   input_domains: {
     t_in: [...Array(120).keys()]
   },

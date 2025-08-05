@@ -25,25 +25,25 @@ export const s0_q_x$ = ({ t_in, t_inner_in, prudence_factor_in }) => {
 // new prudence controls inputs
 // (?? is the concise Javascript "nullish coalescing operator"; commonly used in exactly this pattern to populate default input values in calculang):
 // (applications can pass custom input values to query different results from a model. Formulas can also manipulate input values - as in the capital_requirements formula which follows)
-export const s0_t_inner = ({ t_inner_in }) => t_inner_in ?? 9999;
+export const s0_t_inner = ({ t_inner_in }) => t_inner_in ?? -1;
 export const s0_prudence_factor = ({ prudence_factor_in }) => prudence_factor_in ?? 1;
 
 // Now we use prudence controls
-export const s0_capital_requirement$ = ({ t_in, term_m_in, premium_in }) =>
+export const s0_capital_requirement$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) =>
 (s1_fut_claims({ term_m_in, t_in: s1_t({ t_in }) + 1, t_inner_in: s1_t({ t_in }), prudence_factor_in: 1.2 }) +
 s1_fut_premiums({ term_m_in, premium_in, t_in: s1_t({ t_in }), t_inner_in: s1_t({ t_in }), prudence_factor_in: 1.2 })) * // the prudence effect on premiums is second-order
-s1_num_pols_if({ t_in, prudence_factor_in: 1, t_inner_in: -1 });
+s1_num_pols_if({ t_in, t_inner_in, prudence_factor_in });
 // In nested.py the first month of claims is always 0 in the Term projection, => never used in the capital requirements
 // (apparent in the screenshot https://github.com/actuarialopensource/methodology/blob/main/nested/nested_py_output.png)
 // This timing distinction means I can't replicate values exactly by using `fut_net_cashflow` directly
 
-export const s0_capital_change$ = ({ t_in, term_m_in, premium_in }) => {
-  if (s1_t({ t_in }) == 0) return s0_capital_requirement({ t_in, term_m_in, premium_in });else
-  return s0_capital_requirement({ t_in, term_m_in, premium_in }) - s0_capital_requirement({ term_m_in, premium_in, t_in: s1_t({ t_in }) - 1 });
+export const s0_capital_change$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) => {
+  if (s1_t({ t_in }) == 0) return s0_capital_requirement({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in });else
+  return s0_capital_requirement({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) - s0_capital_requirement({ term_m_in, t_inner_in, prudence_factor_in, premium_in, t_in: s1_t({ t_in }) - 1 });
 };
 
 // surface capital change for visualization in Playground UI:
-export const s0_pv_placeholder$ = ({ t_in, term_m_in, premium_in }) => s0_capital_change({ t_in, term_m_in, premium_in });
+export const s0_pv_placeholder$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) => s0_capital_change({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in });
 
 
 
@@ -121,16 +121,16 @@ export const s0_q_x$m = memoize(s0_q_x$, ({t_in, t_inner_in, prudence_factor_in}
 export const s0_q_x = ({t_in, t_inner_in, prudence_factor_in}) => s0_q_x$m({t_in, t_inner_in, prudence_factor_in})
 model['s0_q_x'] = s0_q_x
 
-export const s0_capital_requirement$m = memoize(s0_capital_requirement$, ({t_in, term_m_in, premium_in}) => Object.values(({t_in, term_m_in, premium_in})).toString()); 
-export const s0_capital_requirement = ({t_in, term_m_in, premium_in}) => s0_capital_requirement$m({t_in, term_m_in, premium_in})
+export const s0_capital_requirement$m = memoize(s0_capital_requirement$, ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => Object.values(({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})).toString()); 
+export const s0_capital_requirement = ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => s0_capital_requirement$m({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})
 model['s0_capital_requirement'] = s0_capital_requirement
 
-export const s0_capital_change$m = memoize(s0_capital_change$, ({t_in, term_m_in, premium_in}) => Object.values(({t_in, term_m_in, premium_in})).toString()); 
-export const s0_capital_change = ({t_in, term_m_in, premium_in}) => s0_capital_change$m({t_in, term_m_in, premium_in})
+export const s0_capital_change$m = memoize(s0_capital_change$, ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => Object.values(({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})).toString()); 
+export const s0_capital_change = ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => s0_capital_change$m({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})
 model['s0_capital_change'] = s0_capital_change
 
-export const s0_pv_placeholder$m = memoize(s0_pv_placeholder$, ({t_in, term_m_in, premium_in}) => Object.values(({t_in, term_m_in, premium_in})).toString()); 
-export const s0_pv_placeholder = ({t_in, term_m_in, premium_in}) => s0_pv_placeholder$m({t_in, term_m_in, premium_in})
+export const s0_pv_placeholder$m = memoize(s0_pv_placeholder$, ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => Object.values(({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})).toString()); 
+export const s0_pv_placeholder = ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => s0_pv_placeholder$m({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})
 model['s0_pv_placeholder'] = s0_pv_placeholder
 
 export const s1_premiums$m = memoize(s1_premiums$, ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => Object.values(({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})).toString()); 

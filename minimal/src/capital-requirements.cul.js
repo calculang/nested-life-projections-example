@@ -5,13 +5,13 @@ export const q_x = () => {
   else return 0;
 };
 
-export const t_inner = () => t_inner_in ?? 9999;
+export const t_inner = () => t_inner_in ?? -1;
 export const prudence_factor = () => prudence_factor_in ?? 1;
 
 export const capital_requirement = () =>
   (fut_claims({ t_in: t() + 1, t_inner_in: t(), prudence_factor_in: 1.2 }) +
     fut_premiums({ t_in: t(), t_inner_in: t(), prudence_factor_in: 1.2 })) *
-  num_pols_if({ prudence_factor_in: 1, t_inner_in: -1 });
+  num_pols_if();
 
 export const capital_change = () => {
   if (t() == 0) return capital_requirement();

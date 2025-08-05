@@ -19,22 +19,22 @@ export const q_x = ({ t_in, t_inner_in, prudence_factor_in }) => {
 // new prudence controls inputs
 // (?? is the concise Javascript "nullish coalescing operator"; commonly used in exactly this pattern to populate default input values in calculang):
 // (applications can pass custom input values to query different results from a model. Formulas can also manipulate input values - as in the capital_requirements formula which follows)
-export const t_inner = ({ t_inner_in }) => t_inner_in ?? 9999;
+export const t_inner = ({ t_inner_in }) => t_inner_in ?? -1;
 export const prudence_factor = ({ prudence_factor_in }) => prudence_factor_in ?? 1;
 
 // Now we use prudence controls
-export const capital_requirement = ({ t_in, term_m_in, premium_in }) =>
+export const capital_requirement = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) =>
 (fut_claims({ term_m_in, t_in: t({ t_in }) + 1, t_inner_in: t({ t_in }), prudence_factor_in: 1.2 }) +
 fut_premiums({ term_m_in, premium_in, t_in: t({ t_in }), t_inner_in: t({ t_in }), prudence_factor_in: 1.2 })) * // the prudence effect on premiums is second-order
-num_pols_if({ t_in, prudence_factor_in: 1, t_inner_in: -1 });
+num_pols_if({ t_in, t_inner_in, prudence_factor_in });
 // In nested.py the first month of claims is always 0 in the Term projection, => never used in the capital requirements
 // (apparent in the screenshot https://github.com/actuarialopensource/methodology/blob/main/nested/nested_py_output.png)
 // This timing distinction means I can't replicate values exactly by using `fut_net_cashflow` directly
 
-export const capital_change = ({ t_in, term_m_in, premium_in }) => {
-  if (t({ t_in }) == 0) return capital_requirement({ t_in, term_m_in, premium_in });else
-  return capital_requirement({ t_in, term_m_in, premium_in }) - capital_requirement({ term_m_in, premium_in, t_in: t({ t_in }) - 1 });
+export const capital_change = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) => {
+  if (t({ t_in }) == 0) return capital_requirement({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in });else
+  return capital_requirement({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) - capital_requirement({ term_m_in, t_inner_in, prudence_factor_in, premium_in, t_in: t({ t_in }) - 1 });
 };
 
 // surface capital change for visualization in Playground UI:
-export const pv_placeholder = ({ t_in, term_m_in, premium_in }) => capital_change({ t_in, term_m_in, premium_in });
+export const pv_placeholder = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) => capital_change({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in });

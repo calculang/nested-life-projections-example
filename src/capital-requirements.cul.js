@@ -19,14 +19,14 @@ export const q_x = () => {
 // new prudence controls inputs
 // (?? is the concise Javascript "nullish coalescing operator"; commonly used in exactly this pattern to populate default input values in calculang):
 // (applications can pass custom input values to query different results from a model. Formulas can also manipulate input values - as in the capital_requirements formula which follows)
-export const t_inner = () => t_inner_in ?? 9999;
+export const t_inner = () => t_inner_in ?? -1;
 export const prudence_factor = () => prudence_factor_in ?? 1;
 
 // Now we use prudence controls
 export const capital_requirement = () =>
   (fut_claims({ t_in: t() + 1, t_inner_in: t(), prudence_factor_in: 1.2 }) +
     fut_premiums({ t_in: t(), t_inner_in: t(), prudence_factor_in: 1.2 })) * // the prudence effect on premiums is second-order
-  num_pols_if({ prudence_factor_in: 1, t_inner_in: -1 });
+  num_pols_if();
 // In nested.py the first month of claims is always 0 in the Term projection, => never used in the capital requirements
 // (apparent in the screenshot https://github.com/actuarialopensource/methodology/blob/main/nested/nested_py_output.png)
 // This timing distinction means I can't replicate values exactly by using `fut_net_cashflow` directly
