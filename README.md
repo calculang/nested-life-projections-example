@@ -73,8 +73,6 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 
 **Note**: Especially when model code is loaded from a URL (by following the instructions above; either approach), there are some bugs around *editing* directly in the Actuarial Playground UI: especially when you switch `.cul.js` files, you probably lose custom changes.
 
-*If you prefer usage in a node.js script or other, please create an issue to request it or a PR*
-
 ## Option 2: Minimal calculang Model
 
 [`./minimal`](./minimal/) achieves the same results but without comments or redundant formulas: for analysis of the calculang logic/implementation itself.
@@ -82,6 +80,22 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 [Load in the Actuarial Playground](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/minimal/src/playground.cul.js). **Click '💬' to show model formulas and use dropdown to select .cul.js files**
 
 ![capital-requirements and term calculang formulas (unannotated)](./minimal/minimal.png)
+
+# Option 3: Run using node.js Script
+
+~~~sh
+npm install
+npm run model-output
+~~~
+
+This creates [`./output/output.txt`](./output/output.txt) which should match [`./output/nestedpy-output.png`](./output/nestedpy-output.png).
+
+Alternatively, run `run.js` directly:
+
+~~~js
+npm install
+node ./output/run.js
+~~~
 
 ---
 
@@ -91,4 +105,8 @@ Nested actuarial modelling approaches are open for discussion with the Actuarial
 
 This month I'm also happy to meet and discuss with members of the [Actuarial Open Source Community](https://www.linkedin.com/groups/13937070) who have notable experience applying Python, Julia, R for actuarial modelling in practice. I'm specifically interested to discuss extensibility of actuarial models in practice.
 
-**More Information**: The '❓' tab in [ActuarialPlayground.com](https://actuarialplayground.com) mentions other instances where I apply the same functionality in calculang. The [calculang README](https://github.com/calculang/calculang) has separate wording for some of the calculang features applied here. A buggy UI that surfaces exactly what the calculang compiler outputs is [here](https://finding-calculang-foc.netlify.app/editor) (FIXING).
+**More Information**: The '❓' tab in [ActuarialPlayground.com](https://actuarialplayground.com) mentions other instances where I apply the same functionality in calculang. The [calculang README](https://github.com/calculang/calculang) has separate wording for some of the calculang features applied here. A buggy UI that surfaces exactly what the calculang compiler outputs is [here](https://finding-calculang-foc.netlify.app/editor).
+
+## Inspecting the calculang compiler
+
+For information purposes, `output` folders in this repository include some additional calculang output files; some details included in their corresponding README files.

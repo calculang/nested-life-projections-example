@@ -5,3 +5,15 @@ Showing some output from the calculang compiler.
 - other .js files are the Javascript corresponding to each processed module. It may be informative to compare these to their corresponding `.cul.js` files, which highlights how the compiler manipulates calculang code into functioning Javascript.
 
 Not shown: sourcemaps or introspection object.
+
+---
+
+Also includes `run.js` to compile and run the model. Use `npm run model-output` or run `node run.js` to produce the table in `output.txt` which matches nested.py:
+
+### nested.py output
+
+![nested.py output](./nestedpy-output.png)
+
+### output.txt
+
+![calculang model output](./output.png)
