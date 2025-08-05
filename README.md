@@ -12,7 +12,7 @@ nested.py implements a `Term` base class and `PrudentTerm` and `RealisticTerm` s
 
 ## calculang model: capital-requirements.cul.js
 
-Similar to with the `Term` base class, the calculang model centralises common modelling logic in `term.cul.js` (itself a simple calculang model).
+Similar to with the `Term` base class, the calculang model centralises common modelling logic in [`term.cul.js`](./src/term.cul.js) (itself a simple calculang model).
 
 [`capital-requirements.cul.js`](./src/capital-requirements.cul.js) is a calculang model that imports the [`term.cul.js`](./src/term.cul.js) model, but "overriding" specific behavior for capital requirement calculations.
 
