@@ -105,7 +105,7 @@ node ./output/run.js
 
 **Feedback/Discussion**: I'm really interested in early reactions about the calculang features applied to this problem. I aim to provide more helpful material for actuaries about how I apply the specific calculang features, and early reactions will help to ground that work.
 
-Nested actuarial modelling approaches are open for discussion with the Actuarial Open Source Community [here](https://github.com/actuarialopensource/methodology/discussions) and a specific discussion about this implementation is posted [here](#). Please participate there!
+Nested actuarial modelling approaches are open for discussion with the Actuarial Open Source Community [here](https://github.com/actuarialopensource/methodology/discussions) and a specific discussion about this implementation is posted [here](https://github.com/actuarialopensource/methodology/discussions/2). Please participate there!
 
 This month I'm also happy to meet and discuss with members of the [Actuarial Open Source Community](https://www.linkedin.com/groups/13937070) who have notable experience applying Python, Julia, R for actuarial modelling in practice. I'm specifically interested to discuss extensibility of actuarial models in practice.
 
