@@ -18,6 +18,8 @@ Notably, the `q_x` formula is overriden to apply a prudence factor or not depend
 
 <details><summary>Related formula definitions</summary>
 
+`capital-requirements.cul.js`
+
 ~~~js
 export const q_x = () => {
   if (t() >= t_inner()) return q_x_() * prudence_factor();
