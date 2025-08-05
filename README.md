@@ -31,7 +31,7 @@ To see results using the Actuarial Playground UI:
 1. Copy to clipboard:
 
 ~~~js
-import { all_cul } from 'TODO/capital.cul.js'
+import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js'
 ~~~
 
 2. Open [ActuarialPlayground.com](https://actuarialplayground.com)
