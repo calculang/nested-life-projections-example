@@ -45,9 +45,7 @@ Input inference helps formulas to be concise, but adaptability is it's real purp
 
 ## Option 1: Annotated calculang Model using Actuarial Playground UI
 
-[**Use this link** to run in the Actuarial Playground UI](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js) OR:
-
-To see results using the Actuarial Playground UI:
+[**Use this link** to run in the Actuarial Playground UI](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js) **Click '💬' to show model formulas and use dropdown to select .cul.js files** OR else:
 
 1. Copy to clipboard:
 
@@ -75,7 +73,7 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 
 [`./minimal`](./minimal/) achieves the same results but without comments or redundant formulas: for analysis of the calculang logic/implementation itself.
 
-[Load in the Actuarial Playground](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/minimal/src/playground.cul.js).
+[Load in the Actuarial Playground](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/minimal/src/playground.cul.js). **Click '💬' to show model formulas and use dropdown to select .cul.js files**
 
 ![capital-requirements and term calculang formulas (unannotated)](./minimal/minimal.png)
 
