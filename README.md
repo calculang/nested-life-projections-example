@@ -2,6 +2,8 @@
 
 This [calculang](https://calculang.dev) example is based on [nested.py](https://github.com/actuarialopensource/methodology/blob/main/nested/nested.py), a "minimum reproduceable nested model" by Lewis Fodgen. It ties back exactly, but implementations are different.
 
+It's an example using [modularity, input inference and overriding](https://github.com/calculang/calculang?tab=readme-ov-file#design-principlesfeatures): key technical features in calculang that permit flexibility and reusability in models ♻️
+
 ## nested.py, using Class Inheritance and Dynamic Inner Projections
 
 nested.py implements a `Term` base class and `PrudentTerm` and `RealisticTerm` subclasses: extending `Term` modelling logic with prudent assumptions and capital requirement calculations respectively.
@@ -10,13 +12,13 @@ nested.py implements a `Term` base class and `PrudentTerm` and `RealisticTerm` s
 
 ## calculang model: capital-requirements.cul.js
 
-Similar to with the `Term` base class, the calculang model centralises common modelling logic in `term.cul.js` (itself a simple model).
+Similar to with the `Term` base class, the calculang model centralises common modelling logic in `term.cul.js` (itself a simple calculang model).
 
-[`capital-requirements.cul.js`](./src/capital-requirements.cul.js) is a calculang model that imports [`term.cul.js`](./src/term.cul.js), but "overriding" specific behavior for capital requirement calculations.
+[`capital-requirements.cul.js`](./src/capital-requirements.cul.js) is a calculang model that imports the [`term.cul.js`](./src/term.cul.js) model, but "overriding" specific behavior for capital requirement calculations.
 
 Notably, the `q_x` formula is overriden to apply a prudence factor or not depending on new projection inputs. Then, `capital_requirements` formula definition can call appropriate cashflow projection formulas, applying appropriate new projection input values relating to prudence.
 
-<details><summary>Related formula definitions</summary>
+<details><summary>🤔 Related formula definitions</summary>
 
 [`capital-requirements.cul.js`](./src/capital-requirements.cul.js)
 
@@ -33,11 +35,15 @@ export const capital_requirement = () =>
 
 </details>
 
-<details><summary>Input inference note</summary>
+<details><summary>Input inference & multipurpose models ♻️</summary>
 
-Although the `q_x` formula is explicitly overridden to use new inputs and the logic in `term.cul.js` has no notion about them, the calculang **compiler** infers that `num_deaths` all the way to `fut_claims` in `term.cul.js` should use the new inputs. Input inference explains why there is a lot of empty/minimalistic brackets in calculang functions and calls (which I might remove in future), and this promotes very general definition of modelling logic, so that can be applied for many different purposes.
+Although the `q_x` formula is explicitly overridden to use new inputs and the logic in `term.cul.js` has no notion about them, the calculang **compiler** infers that `num_deaths` all the way to `fut_claims` in `term.cul.js` should use the new inputs.
 
-Input inference helps formulas to be concise, but adaptability is it's real purpose.
+Input inference explains why there is a lot of empty/minimalistic brackets in calculang functions and calls (which I might remove in future). Input inference promotes very general specification of modelling logic, so that modelling logic can be shared across lots of different modelling exercises.
+
+Input inference clearly helps formulas to be more concise, but flexibility and reusability is it's real purpose.
+
+calculang aims to make models that are multipurpose in the extreme, and where this follows naturally from the language design.
 
 </details>
 
