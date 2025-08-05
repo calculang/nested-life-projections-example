@@ -15,10 +15,12 @@
   "scripts": {
     "minimal-calculang-output": "node ./minimal/output/make-bundle.js",
     "calculang-output": "node ./output/make-bundle.js",
-    "model-output": "node ./output/run.js > ./output/output.txt"
+    "model-output": "node ./output/run.js > ./output/output.txt",
+    "test": "vitest run"
   },
   "dependencies": {
     "arquero": "^8.0.3",
-    "calculang": "github:calculang/calculang#all_cul"
+    "calculang": "github:calculang/calculang#all_cul",
+    "vitest": "^3.2.4"
   }
 }

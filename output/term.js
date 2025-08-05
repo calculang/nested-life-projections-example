@@ -40,7 +40,7 @@ export const fut_premiums = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, 
 };
 
 export const fut_claims = ({ t_in, term_m_in, t_inner_in, prudence_factor_in }) => {
-  if (t({ t_in }) > term_m({ term_m_in }) - 1) return 0;
+  if (t({ t_in }) >= term_m({ term_m_in })) return 0;
   return fut_claims({ term_m_in, t_inner_in, prudence_factor_in, t_in: t({ t_in }) + 1 }) + claims({ t_in, term_m_in, t_inner_in, prudence_factor_in });
 };
 

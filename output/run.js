@@ -21,9 +21,22 @@ const m = await compile({
 console.table(calcudata({
   type: 'objects',
   models: [m.js],
-  input_cursors: [{t_in: 0, term_m_in: 120, premium_in: 1300, start_age_in: 30}],
+  input_cursors: [{t_in: 0, term_m_in: 120, premium_in: 1300, start_age_in: 30, t_inner_in: -1, prudence_factor_in: 1}],
   input_domains: {
     t_in: [...Array(120).keys()]
   },
   outputs: ['capital_change', 'capital_requirement', 'claims', 'net_cashflow', 'num_deaths', 'num_pols_if', 'premiums', 'q_x', 'term_remaining']
 }));
+
+
+
+/*console.table(calcudata({
+  type: 'objects',
+  models: [m.js],
+  input_cursors: [{t_in: 0, term_m_in: 120, premium_in: 1300, start_age_in: 30, t_inner_in: -1, prudence_factor_in: 1}],
+  input_domains: {
+    t_in: [...Array(4).keys()]
+  },
+  outputs: ['capital_requirement', 'q_x']
+}));
+*/

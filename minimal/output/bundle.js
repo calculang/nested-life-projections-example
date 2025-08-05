@@ -8,15 +8,16 @@ let model = {};
 
 export const s0_q_x$ = ({ t_in, t_inner_in, prudence_factor_in }) => {
   if (s1_t({ t_in }) >= s0_t_inner({ t_inner_in })) return s1_q_x_({}) * s0_prudence_factor({ prudence_factor_in });else
-  return s1_q_x_({});
+  return 0;
 };
 
 export const s0_t_inner = ({ t_inner_in }) => t_inner_in ?? 9999;
 export const s0_prudence_factor = ({ prudence_factor_in }) => prudence_factor_in ?? 1;
 
 export const s0_capital_requirement$ = ({ t_in, term_m_in, premium_in }) =>
-s0_fut_claims({ term_m_in, t_in: s1_t({ t_in }) + 1, t_inner_in: s1_t({ t_in }), prudence_factor_in: 1.2 }) +
-s0_fut_premiums({ term_m_in, premium_in, t_in: s1_t({ t_in }), t_inner_in: s1_t({ t_in }), prudence_factor_in: 1.2 });
+(s0_fut_claims({ term_m_in, t_in: s1_t({ t_in }) + 1, t_inner_in: s1_t({ t_in }), prudence_factor_in: 1.2 }) +
+s0_fut_premiums({ term_m_in, premium_in, t_in: s1_t({ t_in }), t_inner_in: s1_t({ t_in }), prudence_factor_in: 1.2 })) *
+s1_num_pols_if({ t_in, prudence_factor_in: 1, t_inner_in: -1 });
 
 export const s0_capital_change$ = ({ t_in, term_m_in, premium_in }) => {
   if (s1_t({ t_in }) == 0) return s0_capital_requirement({ t_in, term_m_in, premium_in });else
@@ -29,7 +30,7 @@ export const s0_fut_premiums$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_
 };
 
 export const s0_fut_claims$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_in }) => {
-  if (s1_t({ t_in }) > s1_term_m({ term_m_in }) - 1) return 0;
+  if (s1_t({ t_in }) >= s1_term_m({ term_m_in })) return 0;
   return s0_fut_claims({ term_m_in, t_inner_in, prudence_factor_in, t_in: s1_t({ t_in }) + 1 }) + s1_claims({ t_in, term_m_in, t_inner_in, prudence_factor_in });
 };
 
