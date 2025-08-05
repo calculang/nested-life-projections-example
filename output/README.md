@@ -17,3 +17,5 @@ Also includes `run.js` to compile and run the model. Use `npm run model-output` 
 ### output.txt
 
 ![calculang model output](./output.png)
+
+`run.js` uses `calcudata`, a convenience API for querying many results from calculang or Javascript models.
