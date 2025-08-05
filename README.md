@@ -2,23 +2,23 @@
 
 This [calculang](https://calculang.dev) example is based on [nested.py](https://github.com/actuarialopensource/methodology/blob/main/nested/nested.py), a "minimum reproduceable nested model" by Lewis Fodgen. It ties back exactly, but implementations are different.
 
-## `nested.py`, using Class Inheritance and Dynamic Inner Projections
+## nested.py, using Class Inheritance and Dynamic Inner Projections
 
-`nested.py` implements a `Term` base class and `PrudentTerm` and `RealisticTerm` subclasses: extending `Term` modelling logic with prudent assumptions and capital requirement calculations respectively.
+nested.py implements a `Term` base class and `PrudentTerm` and `RealisticTerm` subclasses: extending `Term` modelling logic with prudent assumptions and capital requirement calculations respectively.
 
 *At each time point* `RealisticTerm` initialises and runs an inner projection of it's sibling class `PrudentTerm` to estimate prudent capital requirements.
 
-## calculang: `capital-requirements.cul.js`
+## calculang model: capital-requirements.cul.js
 
-Similar to the `Term` base class, the calculang model centralises common modelling logic in `term.cul.js`.
+Similar to with the `Term` base class, the calculang model centralises common modelling logic in `term.cul.js` (itself a simple model).
 
-`capital-requirements.cul.js` is a calculang model that imports `term.cul.js`, but "overriding" specific behavior for capital requirement calculations.
+[`capital-requirements.cul.js`](./src/capital-requirements.cul.js) is a calculang model that imports [`term.cul.js`](./src/term.cul.js), but "overriding" specific behavior for capital requirement calculations.
 
 Notably, the `q_x` formula is overriden to apply a prudence factor or not depending on new projection inputs. Then, `capital_requirements` formula definition can call appropriate cashflow projection formulas, applying appropriate new projection input values relating to prudence.
 
 <details><summary>Related formula definitions</summary>
 
-`capital-requirements.cul.js`
+[`capital-requirements.cul.js`](./src/capital-requirements.cul.js)
 
 ~~~js
 export const q_x = () => {
@@ -67,10 +67,9 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 
 **Tip** 📌: there is a semi-transparent '🥚' in the Actuarial Playground UI; there you can turn on graphs and an improved (more responsive) tooltip over visualization elements, as well as a legend.
 
-**Note**: Especially when model code is loaded from a URL (by following the instructions above), there are some bugs around *editing* directly in the Actuarial Playground UI: especially when you switch `.cul.js` files, you probably lose custom changes.
+**Note**: Especially when model code is loaded from a URL (by following the instructions above; either approach), there are some bugs around *editing* directly in the Actuarial Playground UI: especially when you switch `.cul.js` files, you probably lose custom changes.
 
-*If you don't like using the Playground UI, feel free to create an issue or PR for a node.js script or other that runs this calculang model and outputs values in a table*
-
+*If you prefer usage in a node.js script or other, please create an issue to request it or a PR*
 
 ## Option 2: Minimal calculang Model
 
@@ -82,8 +81,10 @@ import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life
 
 ---
 
-**Feedback/Discussion/Help Wanted**: I'm really interested in early reactions about the calculang approach to this. I aim to provide more helpful material for actuaries about how I apply these patterns, and early reactions will help to ground that work. Nested actuarial modelling approaches are open for discussion with the Actuarial Open Source Community [here](https://github.com/actuarialopensource/methodology/discussions) and a specific discussion about this implementation is [here](#)
+**Feedback/Discussion**: I'm really interested in early reactions about the calculang patterns to this problem. I aim to provide more helpful material for actuaries about how I apply the specific calculang features, and early reactions will help to ground that work.
 
-This month I'm also happy to meet and discuss with members of the [Actuarial Open Source Community](https://www.linkedin.com/groups/13937070) who have notable experience applying Python, Julia, R for actuarial modelling in practice.
+Nested actuarial modelling approaches are open for discussion with the Actuarial Open Source Community [here](https://github.com/actuarialopensource/methodology/discussions) and a specific discussion about this implementation is posted [here](#). Please participate there!
 
-**More Information**: The '❓' tab in [ActuarialPlayground.com](https://actuarialplayground.com) mentions other instances where I apply other patterns using the same functionality in calculang. The [calculang README](https://github.com/calculang/calculang) has separate wording for some of the calculang features applied here. A buggy UI that surfaces exactly what the calculang compiler outputs is [here](https://finding-calculang-foc.netlify.app/editor) (FIXING).
+This month I'm also happy to meet and discuss with members of the [Actuarial Open Source Community](https://www.linkedin.com/groups/13937070) who have notable experience applying Python, Julia, R for actuarial modelling in practice. Specifically interested to discuss extensibility of actuarial models in practice.
+
+**More Information**: The '❓' tab in [ActuarialPlayground.com](https://actuarialplayground.com) mentions other instances where I apply the same functionality in calculang. The [calculang README](https://github.com/calculang/calculang) has separate wording for some of the calculang features applied here. A buggy UI that surfaces exactly what the calculang compiler outputs is [here](https://finding-calculang-foc.netlify.app/editor) (FIXING).
