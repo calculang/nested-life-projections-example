@@ -52,25 +52,7 @@ Input inference clearly helps formulas to be more concise, but flexibility and r
 
 ## Option 1: Annotated calculang Model using Actuarial Playground UI
 
-[**Use this link** to run in the Actuarial Playground UI](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js) **Click '💬' to show model formulas and use dropdown to select .cul.js files** OR else:
-
-<details><summary>Alternative steps</summary>
-
-1. Copy to clipboard:
-
-~~~js
-import { all_cul } from 'https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js'
-~~~
-
-2. Open [ActuarialPlayground.com](https://actuarialplayground.com)
-
-3. Click '💬' to show model formulas
-
-4. Select all code, delete, replace with the clipboard
-
-5. The visualization will update, and you can browse all the formula code by looking in the dropdown
-
-</details>
+[**Use this link** to run in the Actuarial Playground UI](https://actuarialplayground.com/#url=https://raw.githubusercontent.com/calculang/nested-life-projections-example/refs/heads/main/src/capital-requirements.cul.js) **Click '💬' to show model formulas and use dropdown to select .cul.js files**
 
 **Tip**: Use the mouse wheel to zoom in and out of the Playground visualization, and hold shift to zoom on the y axis only (to control the aspect ratio).
 
@@ -100,6 +82,20 @@ Alternatively, run `run.js` directly:
 ~~~js
 npm install
 node ./output/run.js
+~~~
+
+### Testing
+
+The repo includes a snapshot test that runs the model and compares against ~reviewed static output, to run:
+
+~~~js
+npm run test
+~~~
+
+To update the snapshot, run:
+
+~~~js
+npm run test:update
 ~~~
 
 ---

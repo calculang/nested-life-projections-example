@@ -16,7 +16,9 @@
     "minimal-calculang-output": "node ./minimal/output/make-bundle.js",
     "calculang-output": "node ./output/make-bundle.js",
     "model-output": "node ./output/run.js > ./output/output.txt",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:update": "vitest run --update",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "arquero": "^8.0.3",
