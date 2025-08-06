@@ -8,8 +8,8 @@ import { all_cul } from "./term.cul.js";
 
 // we change or 'override' the definition of q_x by adding new prudence controls.
 // In calculang we can do this without refactoring things that use q_x (because of 'input inference').
-// We apply prudence at time >= `t_inner`; t_inner is 9999 by default (defined below) so that no prudence is applied except where specified in capital_requirement calculation.
-// `q_x_` inside this definition refers to the original definition of q_x, imported from term.cul.js - when it's updated, this will reflect it
+// We apply prudence at time >= `t_inner`; prudence_factor_in is 1 by default so that no prudence is applied except where specified in capital_requirement calculation.
+// `q_x_` inside this definition refers to the original definition of q_x, imported from term.cul.js
 
 export const q_x = () => {
   if (t() >= t_inner()) return q_x_() * prudence_factor();

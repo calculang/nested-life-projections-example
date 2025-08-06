@@ -25,12 +25,13 @@ Notably, the `q_x` formula is overriden to apply a prudence factor or not: depen
 ~~~js
 export const q_x = () => {
   if (t() >= t_inner()) return q_x_() * prudence_factor();
-  else return q_x_();
+  else return 0;
 };
 
 export const capital_requirement = () =>
-  fut_claims({ t_in: t() + 1, t_inner_in: t(), prudence_factor_in: 1.2 }) +
-  fut_premiums({ t_in: t(), t_inner_in: t(), prudence_factor_in: 1.2 });
+  (fut_claims({ t_in: t() + 1, t_inner_in: t(), prudence_factor_in: 1.2 }) +
+    fut_premiums({ t_in: t(), t_inner_in: t(), prudence_factor_in: 1.2 })) *
+  num_pols_if();
 ~~~
 
 </details>
@@ -39,11 +40,11 @@ export const capital_requirement = () =>
 
 Although the `q_x` formula is explicitly overridden to use new inputs and the logic in `term.cul.js` has no notion about them, the calculang **compiler** infers that `num_deaths` all the way to `fut_claims` in `term.cul.js` should use the new inputs.
 
-Input inference explains why there is a lot of empty/minimalistic brackets in calculang functions and calls (which I might remove in future). Input inference promotes very general specification of modelling logic, so that modelling logic can be shared across lots of different modelling exercises.
+Input inference explains why there is a lot of empty/minimalistic brackets in calculang functions and calls (which I might remove in future). Input inference promotes very general specification of modelling logic, so that it can be shared across lots of different exercises on models.
 
-Input inference clearly helps formulas to be more concise, but flexibility and reusability is it's real purpose.
+calculang aims to make models that are multipurpose in the extreme (and transparent and communicable), and where this follows naturally from the language design.
 
-calculang aims to make models that are multipurpose in the extreme, and where this follows naturally from the language design.
+Input inference clearly helps formulas to be more concise, but flexibility and reusability is it's real purpose ♻️
 
 </details>
 
