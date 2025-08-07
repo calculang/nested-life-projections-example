@@ -25,8 +25,8 @@ export const s0_q_x$ = ({ t_in, t_inner_in, prudence_factor_in }) => {
 // new prudence controls inputs
 // (?? is the concise Javascript "nullish coalescing operator"; commonly used in exactly this pattern to populate default input values in calculang):
 // (applications can pass custom input values to query different results from a model. Formulas can also manipulate input values - as in the capital_requirements formula which follows)
-export const s0_t_inner = ({ t_inner_in }) => t_inner_in ?? -1;
-export const s0_prudence_factor = ({ prudence_factor_in }) => prudence_factor_in ?? 1;
+export const s0_t_inner$ = ({ t_inner_in }) => t_inner_in ?? -1;
+export const s0_prudence_factor$ = ({ prudence_factor_in }) => prudence_factor_in ?? 1;
 
 // Now we use prudence controls
 export const s0_capital_requirement$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) =>
@@ -72,7 +72,7 @@ export const s1_num_deaths$ = ({ t_in, t_inner_in, prudence_factor_in }) => {
   return s1_num_pols_if({ t_inner_in, prudence_factor_in, t_in: s1_t({ t_in }) - 1 }) * s0_q_x({ t_inner_in, prudence_factor_in, t_in: s1_t({ t_in }) - 1 });
 };
 
-export const s1_q_x_ = ({}) => 0.001;
+export const s1_q_x_$ = ({}) => 0.001;
 
 export const s1_net_cashflow$ = ({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) => s1_premiums({ t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in }) + s1_claims({ t_in, term_m_in, t_inner_in, prudence_factor_in }); // note signs
 
@@ -108,18 +108,26 @@ export const s1_age$ = ({ start_age_in, t_in }) => s1_start_age({ start_age_in }
 export const s1_term_remaining$ = ({ term_m_in, t_in }) => s1_term_m({ term_m_in }) - s1_t({ t_in });
 
 // inputs:
-export const s1_t = ({ t_in }) => t_in;
+export const s1_t$ = ({ t_in }) => t_in;
 
 // setting default values from model point data specified in nested.py __main__ block
-export const s1_term_m = ({ term_m_in }) => term_m_in ?? 120;
-export const s1_premium = ({ premium_in }) => premium_in ?? 1300;
+export const s1_term_m$ = ({ term_m_in }) => term_m_in ?? 120;
+export const s1_premium$ = ({ premium_in }) => premium_in ?? 1300;
 export const s1_sum_assured$ = ({}) => 100_000; // for interactive sum assured in Playground UI use:  sum_assured_in ?? 100_000
-export const s1_start_age = ({ start_age_in }) => start_age_in ?? 30; // not used
+export const s1_start_age$ = ({ start_age_in }) => start_age_in ?? 30; // not used
 
 
 export const s0_q_x$m = memoize(s0_q_x$, ({t_in, t_inner_in, prudence_factor_in}) => Object.values(({t_in, t_inner_in, prudence_factor_in})).toString()); 
 export const s0_q_x = ({t_in, t_inner_in, prudence_factor_in}) => s0_q_x$m({t_in, t_inner_in, prudence_factor_in})
 model['s0_q_x'] = s0_q_x
+
+export const s0_t_inner$m = memoize(s0_t_inner$, ({t_inner_in}) => Object.values(({t_inner_in})).toString()); 
+export const s0_t_inner = ({t_inner_in}) => s0_t_inner$m({t_inner_in})
+model['s0_t_inner'] = s0_t_inner
+
+export const s0_prudence_factor$m = memoize(s0_prudence_factor$, ({prudence_factor_in}) => Object.values(({prudence_factor_in})).toString()); 
+export const s0_prudence_factor = ({prudence_factor_in}) => s0_prudence_factor$m({prudence_factor_in})
+model['s0_prudence_factor'] = s0_prudence_factor
 
 export const s0_capital_requirement$m = memoize(s0_capital_requirement$, ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => Object.values(({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})).toString()); 
 export const s0_capital_requirement = ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => s0_capital_requirement$m({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})
@@ -148,6 +156,10 @@ model['s1_num_pols_if'] = s1_num_pols_if
 export const s1_num_deaths$m = memoize(s1_num_deaths$, ({t_in, t_inner_in, prudence_factor_in}) => Object.values(({t_in, t_inner_in, prudence_factor_in})).toString()); 
 export const s1_num_deaths = ({t_in, t_inner_in, prudence_factor_in}) => s1_num_deaths$m({t_in, t_inner_in, prudence_factor_in})
 model['s1_num_deaths'] = s1_num_deaths
+
+export const s1_q_x_$m = memoize(s1_q_x_$, ({}) => Object.values(({})).toString()); 
+export const s1_q_x_ = ({}) => s1_q_x_$m({})
+model['s1_q_x_'] = s1_q_x_
 
 export const s1_net_cashflow$m = memoize(s1_net_cashflow$, ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => Object.values(({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})).toString()); 
 export const s1_net_cashflow = ({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in}) => s1_net_cashflow$m({t_in, term_m_in, t_inner_in, prudence_factor_in, premium_in})
@@ -185,9 +197,25 @@ export const s1_term_remaining$m = memoize(s1_term_remaining$, ({term_m_in, t_in
 export const s1_term_remaining = ({term_m_in, t_in}) => s1_term_remaining$m({term_m_in, t_in})
 model['s1_term_remaining'] = s1_term_remaining
 
+export const s1_t$m = memoize(s1_t$, ({t_in}) => Object.values(({t_in})).toString()); 
+export const s1_t = ({t_in}) => s1_t$m({t_in})
+model['s1_t'] = s1_t
+
+export const s1_term_m$m = memoize(s1_term_m$, ({term_m_in}) => Object.values(({term_m_in})).toString()); 
+export const s1_term_m = ({term_m_in}) => s1_term_m$m({term_m_in})
+model['s1_term_m'] = s1_term_m
+
+export const s1_premium$m = memoize(s1_premium$, ({premium_in}) => Object.values(({premium_in})).toString()); 
+export const s1_premium = ({premium_in}) => s1_premium$m({premium_in})
+model['s1_premium'] = s1_premium
+
 export const s1_sum_assured$m = memoize(s1_sum_assured$, ({}) => Object.values(({})).toString()); 
 export const s1_sum_assured = ({}) => s1_sum_assured$m({})
 model['s1_sum_assured'] = s1_sum_assured
+
+export const s1_start_age$m = memoize(s1_start_age$, ({start_age_in}) => Object.values(({start_age_in})).toString()); 
+export const s1_start_age = ({start_age_in}) => s1_start_age$m({start_age_in})
+model['s1_start_age'] = s1_start_age
   // from https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-esm.js
 
   // Memoize an expensive function by storing its results.
@@ -247,8 +275,8 @@ export const pv_placeholder = s0_pv_placeholder; model['pv_placeholder'] = pv_pl
 
 
 model['s0_q_x$'] = s0_q_x$;
-model['s0_t_inner'] = s0_t_inner;
-model['s0_prudence_factor'] = s0_prudence_factor;
+model['s0_t_inner$'] = s0_t_inner$;
+model['s0_prudence_factor$'] = s0_prudence_factor$;
 model['s0_capital_requirement$'] = s0_capital_requirement$;
 model['s0_capital_change$'] = s0_capital_change$;
 model['s0_pv_placeholder$'] = s0_pv_placeholder$;
@@ -256,7 +284,7 @@ model['s1_premiums$'] = s1_premiums$;
 model['s1_claims$'] = s1_claims$;
 model['s1_num_pols_if$'] = s1_num_pols_if$;
 model['s1_num_deaths$'] = s1_num_deaths$;
-model['s1_q_x_'] = s1_q_x_;
+model['s1_q_x_$'] = s1_q_x_$;
 model['s1_net_cashflow$'] = s1_net_cashflow$;
 model['s1_fut_net_cashflow$'] = s1_fut_net_cashflow$;
 model['s1_fut_premiums$'] = s1_fut_premiums$;
@@ -266,9 +294,9 @@ model['s1_pv_premiums$'] = s1_pv_premiums$;
 model['s1_pv_claims$'] = s1_pv_claims$;
 model['s1_age$'] = s1_age$;
 model['s1_term_remaining$'] = s1_term_remaining$;
-model['s1_t'] = s1_t;
-model['s1_term_m'] = s1_term_m;
-model['s1_premium'] = s1_premium;
+model['s1_t$'] = s1_t$;
+model['s1_term_m$'] = s1_term_m$;
+model['s1_premium$'] = s1_premium$;
 model['s1_sum_assured$'] = s1_sum_assured$;
-model['s1_start_age'] = s1_start_age;
+model['s1_start_age$'] = s1_start_age$;
 
