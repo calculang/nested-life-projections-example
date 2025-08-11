@@ -1,4 +1,4 @@
-// write out bundle with no memoization
+// write out bundle
 
 import { resolve } from "node:path";
 import { readFile, writeFile } from "node:fs/promises";
